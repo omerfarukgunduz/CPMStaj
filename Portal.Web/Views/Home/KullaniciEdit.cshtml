@@ -1,0 +1,120 @@
+﻿@using Portal.Domain.Entities;
+@{
+    Layout = "_AdminLayout";
+}
+@model User
+<head>
+<title>Admin Paneli - Kullanıcı Yönetimi</title>
+</head>
+
+<body>
+
+    @{
+        // Örnek bir liste oluşturma
+        List<SelectListItem> roleList = new List<SelectListItem>
+    {
+    new SelectListItem { Value = "1", Text = "Kullanıcı" },
+    new SelectListItem { Value = "2", Text =  "Admin"},
+    
+    // Daha fazla seçenek eklenebilir
+    };
+    }
+
+    <form  style=" box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); padding: 20px; " method="post" action="KullaniciEdit" enctype="multipart/form-data">
+
+
+                    <div class="modal-header">
+                        <h1 class="form-group" id="exampleModalLabel">Kullanıcı Güncelle</h1>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Kullanıcı Id</h3>
+            <div class="form-group" id="Id"> @Html.TextBoxFor(elm=>elm.Id, new {@class = "form-control", @type="text", @placeholder="Rol giriniz...", @value = Model?.Id , @readonly = "readonly"}) </div>
+
+    
+                        <h3>Kullanıcı Adı	</h3>
+                        <div class="form-group" id="kullaniciadi"> @Html.TextBoxFor(elm=>elm.UserName, new {@class = "form-control", @type="text", @placeholder="Kullanıcı adı giriniz...", @value = Model?.UserName}) </div>
+
+
+                        <h3>Şifre</h3>
+                        <div class="form-group" id="sifre"> @Html.TextBoxFor(elm=>elm.Password, new {@class = "form-control", @type="text", @placeholder="Şifre giriniz...", @value = Model?.Password}) </div>
+
+                        <h3>Kullanıcı Rolü</h3>
+                        <div class="form-group" id="rol">
+                @Html.DropDownListFor(elm => elm.Role, new SelectList(roleList, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+
+
+                        <h3>Son Değişiklik Tarihi</h3>
+            <div class="form-group" id="createdDate"> @Html.TextBoxFor(elm=>elm.CreatedDate, new {@class = "form-control", @type="text", @value = Model?.CreatedDate , @readonly = "readonly"}) </div>
+                        
+
+
+                    </div>
+                    
+
+                    <div class="Buttonlar">
+            <a type="button" class="btn btn-secondary" asp-controller="Home" asp-action="AdminKullaniciListesi">İptal</a>
+            <button id="Kaydetbutton" class="btn btn-primary">Kaydet</button>
+                        <button id="submitbutton" type="submit" style="display:none;"></button>
+                    </div>
+    </form>
+    @section Scripts{
+       
+
+            <script>
+                $(document).ready(function () {
+                    $('#Kaydetbutton').on('click', function (e) {
+                        e.preventDefault();
+
+                        Swal.fire({
+                            title: 'Değişiklikler kaydedilsin mi?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Evet, Kaydet',
+                            cancelButtonText: 'İptal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Mesajın görüntülenmesini ve belirli bir süre beklemesini sağla
+                                Swal.fire({
+                                    title: 'Başarılı!',
+                                    text: 'İşlem başarıyla tamamlandı.',
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    showConfirmButton:false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Tamam',
+                                    timer: 1000 // Mesajın 1.5 saniye boyunca görünmesini sağlar
+                                }).then(() => {
+                                    // Belirli bir süre bekledikten sonra clickButton fonksiyonunu çağır
+                                    setTimeout(clickButton, 1000); // Örneğin, 1 saniye bekledikten sonra çağrılacak
+                                });
+                            }
+                        });
+                    });
+                });
+
+                function clickButton() {
+                    // Butonun DOM öğesini seçiyoruz
+                    var button = document.getElementById("submitbutton");
+
+                    // Simüle edilmiş bir tıklama olayı oluşturuyoruz
+                    var event = new MouseEvent("click", {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    });
+
+                    // Oluşturduğumuz tıklama olayını butona gönderiyoruz
+                    button.dispatchEvent(event);
+                   
+                    
+                }
+                
+            </script> @* Kaydet onayı sweatalert*@
+
+    
+
+    }
+</body>

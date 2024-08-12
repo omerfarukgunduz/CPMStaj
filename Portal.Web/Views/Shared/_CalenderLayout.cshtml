@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head> 
+    
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>Takvim</title>
+
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" />
+    <style> 
+    body{
+            font-family: "Poppins", Arial, sans-serif !important; 
+    }
+    </style>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <script type="text/javascript">
+            function preventBack() { window.history.forward(); }
+
+            setTimeout(preventBack, 0);
+
+            window.onunload = function () { null };
+
+            var refererUrl = document.referrer;
+
+            setTimeout(function () {
+                window.location = refererUrl;
+            }, 300); // 300 milisaniye gecikme süresi
+        </script>
+    }
+</head>
+
+
+<body>
+    <meta charset='utf-8'>
+    <div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" class="active">
+          <div class="sidebar-toggle-btn" style=" margin: 2px 8px;">
+              <img id="sidebarCollapse" src="https://i.hizliresim.com/fws6wtg.png" class="sidebar-toggle-btn" alt="Toggle Menu">
+         </div>
+         <div> 
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+          </li>
+          @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
+           <li>
+           <a asp-action="AdminKullaniciListesi"><span class="fa fa-user"></span> Kullanıcı Yönetimi</a>
+           </li>
+         }
+                          
+          <li>
+            <a asp-action="Takvim"><span class="fa fa-sticky-note"></span> Takvim</a>
+          </li>
+           @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
+          <li>
+            <a asp-action="Api"><span class="fa fa-cogs"></span> API Ayarları</a>
+          </li>
+        }
+          <li>
+          <a asp-controller="Login" asp-action="CikisYap"><span class="fa fa-sign-out"></span> Çıkış Yap</a>
+          </li>
+ 
+        </ul>
+        </div> 
+
+        <div class="footer">
+        	
+        </div>
+    	</nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    </div>
+
+
+
+
+    
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
+    
+    <script>
+    $(document).ready(function () {
+        // When the Çıkış Yap button is clicked
+        $("a[href='#']").click(function () {
+            // Perform log out action here
+            // For example, redirect the user to the log out page
+            window.location.href = "/Home/Index"; // Change to the appropriate URL
+        });
+    });
+</script>
+    
+</body>
+</html>

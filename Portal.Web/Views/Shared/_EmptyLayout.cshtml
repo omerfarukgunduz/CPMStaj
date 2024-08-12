@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head> 
+    
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" />
+
+   
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/sidebar-07/css/style.css"> <!-- Doğru CSS dosyası yolu burada olmalı -->
+    
+
+</head>
+
+<body>
+    <meta charset='utf-8'>
+    <header>
+
+
+    </header>
+    
+     <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    
+  
+    
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.esm.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@using Portal.Domain.Entities;
+@model Etkinlik
+@{
+    //Layout = "_AdminLayout";
+    Layout = null;
+}
+
+<h5>Etkinlik Tarihi</h5>
+<div class="form-group"> @Html.TextBoxFor(elm => elm.start, new { @class = "form-control", @type = "text", @readonly = "readonly" }) </div>
+
+<h5>Etkinlik Tekrarlama Sıklığı</h5>
+<div class="form-group"> @Html.TextBoxFor(elm=>elm.Tekrar, new {@class = "form-control", @type="text", @readonly = "readonly"}) </div>
+
+<h5>Etkinlik Adı</h5>
+<div class="form-group"> @Html.TextBoxFor(elm => elm.title, new { @class = "form-control", @type = "text" , @readonly = "readonly"}) </div>
+
+<h5>Etkinlik Metni</h5>
+<div class="form-group"> @Html.TextAreaFor(elm => elm.description, new { @class = "form-control" , @readonly = "readonly"}) </div>
+
+<h5>Paylaşılacak Hesap</h5>
+<div class="form-group"> @Html.TextBoxFor(elm => elm.ApiTitle, new { @class = "form-control", @type = "text" , @readonly = "readonly"}) </div>
+
+@if (!string.IsNullOrEmpty(Model.image))
+{
+    <h5>Fotoğraf</h5>
+    <div class="form-group"> <img src="~/Images/@Model.image" +".png" alt="Fotoğraf Görüntüsü" style="max-height:400px; max-width:400px;"></div>
+}
+
+<input id="partialItemId" hidden value="@Model.Id"/>
+<input id="partialItemGroupId" hidden value="@Model.TekrarEtkinlikGrupId.ToString()" />
+
+
+
+
+
+
+
+

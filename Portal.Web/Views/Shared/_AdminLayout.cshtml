@@ -1,0 +1,114 @@
+﻿
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/sidebar-07/css/style.css"> <!-- Doğru CSS dosyası yolu burada olmalı -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <script type="text/javascript">
+            function preventBack() { window.history.forward(); }
+
+            setTimeout(preventBack, 0);
+
+            window.onunload = function () { null };
+
+            var refererUrl = document.referrer;
+
+            setTimeout(function () {
+                window.location = refererUrl;
+            }, 300); // 300 milisaniye gecikme süresi
+        </script>
+    }
+
+</head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" class="active">
+          <div class="sidebar-toggle-btn" style=" margin: 2px 8px;">
+              <img id="sidebarCollapse" src="https://i.hizliresim.com/fws6wtg.png" class="sidebar-toggle-btn" alt="Toggle Menu">
+         </div>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+          </li>
+          @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
+           <li>
+           <a asp-action="AdminKullaniciListesi"><span class="fa fa-user"></span> Kullanıcı Yönetimi</a>
+           </li>
+         }
+                          
+          <li>
+            <a asp-action="Takvim"><span class="fa fa-sticky-note"></span> Takvim</a>
+          </li>
+           @if(User.FindFirst(System.Security.Claims.ClaimTypes.Role).Value=="2")
+        { 
+          <li>
+            <a asp-action="Api"><span class="fa fa-cogs"></span> API Ayarları</a>
+          </li>
+        }
+          <li>
+          <a asp-controller="Login" asp-action="CikisYap"><span class="fa fa-sign-out"></span> Çıkış Yap</a>
+          </li>
+ 
+        </ul>
+
+        <div class="footer" >
+        	    <p style="text-align:center; font-size:11px;" > © 2023 Tüm Hakları Saklıdır.</p>
+                <p style="text-align:center ; font-size:11px;">Created By Berke & Ömer</p>
+                           
+        </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+   
+          <div class="container-fluid">
+                   @RenderBody() <!-- This is where the content from your Razor pages will be injected -->
+
+          </div>
+   
+
+
+      </div>
+		</div>
+
+    <script src="~/jquery/jquery.min.js"></script>
+        @*
+    <script src="~/sidebar-07/js/jquery.min.js"></script>
+    <script src="~/sidebar-07/js/popper.js"></script>
+    *@
+    <script src="~/sidebar-07/js/bootstrap.min.js"></script>
+    <script src="~/sidebar-07/js/main.js"></script>
+    <!-- SweetAlert kütüphanesinin CSS ve JS dosyalarını ekleyin -->
+    @*<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @RenderSection("Scripts",false)
+
+
+
+
+    @* <script>
+        $(document).ready(function () {
+            // When the Çıkış Yap button is clicked
+            $("a[href='#']").click(function () {
+                // Perform log out action here
+                // For example, redirect the user to the log out page
+                window.location.href = "/Home/Index"; // Change to the appropriate URL
+            });
+        });
+    </script>
+*@
+ </body>
+</html>
